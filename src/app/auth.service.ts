@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from '@firebase/auth';
 import { Observable, from, switchMap } from 'rxjs';
-import { getAuth } from "firebase/auth";
+import { authState } from '@firebase/auth'; // or from the correct file
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private auth: Auth;
-  currentUser$ = authState(this.auth); 
+
+  currentUser$ = authState(this.afAuth); 
   user$: Observable<any>;
 
-  constructor() {
-    this.auth = getAuth();
+  constructor(private afAuth: AngularFireAuth) {
     this.user$ = new Observable();
   }
 
   signUp(username:string, email: string, password: string) {
-    return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe( 
+    return from(createUserWithEmailAndPassword(this.afAuth, email, password)).pipe( 
       switchMap(({user}) => updateProfile(user, {displayName: username})));
   }
 
-  login(email: string, password: string): Observable<any> {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
-  }
+login(email: string, password: string): Observable<any> {
+  return from(signInWithEmailAndPassword(this.afAuth, email, password));
+}
 
-  logout(): Observable<any>{
-    return from(this.auth.signOut());
-  }
+logout(): Observable<any>{
+return from(this.afAuth.signOut());
+}
 }

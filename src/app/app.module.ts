@@ -20,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { getAuth } from '@firebase/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
 
 
@@ -45,6 +48,8 @@ import { getAuth } from '@firebase/auth';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
