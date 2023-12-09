@@ -16,16 +16,15 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "es2017",
     "module": "es2020",
     "lib": [
       "es2020",
       "dom"
-    ],
-    "useDefineForClassFields": false
+    ]
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
+    "enableI18nLegacyMessageIdFormat": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
