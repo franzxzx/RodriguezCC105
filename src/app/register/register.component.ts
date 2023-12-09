@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Form, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,15 +9,15 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  registerForm= new FormGroup({
-  username: new FormControl('',Validators.required),
-  email: new FormControl('',[Validators.required, Validators.email]),
-  password: new FormControl('', Validators.required),
-  confirmpassword: new FormControl('', Validators.required)
+  registerForm= new UntypedFormGroup({
+  username: new UntypedFormControl('',Validators.required),
+  email: new UntypedFormControl('',[Validators.required, Validators.email]),
+  password: new UntypedFormControl('', Validators.required),
+  confirmpassword: new UntypedFormControl('', Validators.required)
 },
 {
 })
-constructor(private fb: FormBuilder, private router: Router){}
+constructor(private fb: UntypedFormBuilder, private router: Router){}
 
 get username(){
   return this.registerForm.get('username');

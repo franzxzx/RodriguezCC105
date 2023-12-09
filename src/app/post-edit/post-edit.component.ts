@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, MaxValidator } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, MaxValidator } from '@angular/forms';
 import { PostService  } from '../post.service';
 import { Post } from '../post.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { BackEndService } from '../back-end.service';
   styleUrls: ['./post-edit.component.css'],
 })
 export class PostEditComponent implements OnInit {
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   index: number= 0;
   editMode = false;
   constructor(private postService: PostService, private router: Router, private actRoute: ActivatedRoute, private backendservice: BackEndService) { }
@@ -35,10 +35,10 @@ export class PostEditComponent implements OnInit {
       }
     }
     );
-    this.form = new FormGroup({
-      title: new FormControl(edittitle, [Validators.required]),
-      imagePath: new FormControl(editimagePath, [Validators.required]),
-      description: new FormControl(editdescription, [Validators.required])
+    this.form = new UntypedFormGroup({
+      title: new UntypedFormControl(edittitle, [Validators.required]),
+      imagePath: new UntypedFormControl(editimagePath, [Validators.required]),
+      description: new UntypedFormControl(editdescription, [Validators.required])
   })
 }
   onSubmit() {

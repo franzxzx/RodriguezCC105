@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent{
 
-  loginform=new FormGroup({
-    email:new FormControl('',[Validators.required, Validators.email]),
-    password:new FormControl('', Validators.required)
+  loginform=new UntypedFormGroup({
+    email:new UntypedFormControl('',[Validators.required, Validators.email]),
+    password:new UntypedFormControl('', Validators.required)
   });
-  constructor(private fb: FormBuilder, private router:Router) {}
+  constructor(private fb: UntypedFormBuilder, private router:Router) {}
   get email(){
     return this.loginform.get('password');
   }
