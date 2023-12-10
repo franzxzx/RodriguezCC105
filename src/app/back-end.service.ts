@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PostService } from './post.service';
 import { Post } from './post.model';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({

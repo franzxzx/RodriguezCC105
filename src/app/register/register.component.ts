@@ -1,42 +1,38 @@
-import { Component } from '@angular/core';
-import { Form, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
-  registerForm= new UntypedFormGroup({
-  username: new UntypedFormControl('',Validators.required),
-  email: new UntypedFormControl('',[Validators.required, Validators.email]),
-  password: new UntypedFormControl('', Validators.required),
-  confirmpassword: new UntypedFormControl('', Validators.required)
-},
-{
-})
-constructor(private fb: UntypedFormBuilder, private router: Router){}
+  email : string = '';
+  password : string = '';
 
-get username(){
-  return this.registerForm.get('username');
-}
-get email(){
-  return this.registerForm.get('email');
-}
-get password(){
-  return this.registerForm.get('password');
-}
-get confirmpassword(){
-  return this.registerForm.get('confirmpassword'); }
+  constructor(private auth : AuthService) { }
 
-submit(){
-  if(!this.registerForm.valid){
-    return;
-}
-const {username, email, password} = this.registerForm.value; 
-if(username && email && password){ 
-}
-}
+  ngOnInit(): void {
+  }
+
+  register() {
+
+    if(this.email == '') {
+      alert('Please enter email');
+      return;
+    }
+
+    if(this.password == '') {
+      alert('Please enter password');
+      return;
+    }
+
+    this.auth.register(this.email,this.password);
+    
+    this.email = '';
+    this.password = '';
+
+  }
+
 }

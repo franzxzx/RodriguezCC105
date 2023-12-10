@@ -1,37 +1,33 @@
-<body>
-    <form [formGroup]="registerForm" (ngSubmit)="submit()">
-        <h1>Register</h1>
-        <div class="input-box">
-        <input type="text" placeholder="Email" formControlName="email" required>
-        
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col"></div>
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <h4 class="text-dark text-muted">Register</h4>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Email</label>
+                          <input type="email" class="form-control" name="email" [(ngModel)]="email">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Password</label><small id="passwordHelpInline" class="text-muted">
+                            Must be 6-20 characters long.
+                          </small>
+                          <input type="password" class="form-control" name="password" [(ngModel)]="password">
+                        </div>
+                        <button type="button" class="btn btn-info" (click)="register()">Register</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="/login" style="text-decoration: none;">Have an account ? <span class="text-danger">Login</span></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
-            <div *ngIf="email?.errors?.['email']"> *Email should be valid</div>
-        </small>
-        <div class="input-box">
-            <input type="text" placeholder="Username" formControlName="username" required>
-            
-        </div>
-        <div class="input-box">
-            <input type="password" placeholder="Password" formControlName="password" required>
-            
-        </div>
-        <small *ngIf="registerForm.errors?.['passwordMismatch']" class="error">
-        <div>*Password not match</div>
-        </small>
-        <div class="input-box">
-            <input type="password" placeholder="Confirm Password" formControlName="confirmpassword">
-            
-        </div>
-        <div class="remember-forgot">
-            <label><input type="checkbox">Remember me</label>
-            <a href="#">Forgot Password</a>
-        </div>
-            <button type="submit" class="btn" [disabled]="registerForm.invalid"> Login </button>
-        <div class="register-link">
-            <p>Have an account? <a href="login"></a></p>
-        </div>
-        </form>
-    </body>
-    
-    
+        <div class="col"></div>
+    </div>
+</div>
