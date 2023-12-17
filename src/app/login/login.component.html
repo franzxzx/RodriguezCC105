@@ -11,15 +11,10 @@
     </small>
     <div class="input-box">
         <input type="password" placeholder="Password" formControlName="password" required>
-        
     </div>
-        <div class="remember-forgot">
-            <label><input type="checkbox">Remember me</label>
-            <a href="#">Forgot password </a>
-        </div>
         <button type="submit" class="btn"[disabled]="loginform.invalid">login</button>
         <div class="register-link">
-            <p> No account? <a href="register"></a></p>
+            <button><a href="register">No account?</a></button>
         </div>
     </form>
     </div>

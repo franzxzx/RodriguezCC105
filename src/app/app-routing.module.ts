@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'post-add', component: PostEditComponent },
   { path: 'post-edit/:index', component: PostEditComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

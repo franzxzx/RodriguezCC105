@@ -4,6 +4,8 @@ import { PostService  } from '../post.service';
 import { Post } from '../post.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BackEndService } from '../back-end.service';
+import { user } from '@angular/fire/auth/public_api';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-post-edit',
@@ -14,7 +16,7 @@ export class PostEditComponent implements OnInit {
   form!: UntypedFormGroup;
   index: number= 0;
   editMode = false;
-  constructor(private postService: PostService, private router: Router, private actRoute: ActivatedRoute, private backendservice: BackEndService) { }
+  constructor(private postService: PostService, private router: Router, private actRoute: ActivatedRoute, private backendservice: BackEndService, private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
     let edittitle= '';
@@ -41,28 +43,31 @@ export class PostEditComponent implements OnInit {
       description: new UntypedFormControl(editdescription, [Validators.required])
   })
 }
-  onSubmit() {
-    const title = this.form.value.title;
-    const imagePath = this.form.value.imagePath;
-    const description = this.form.value.description;
-    const author = this.form.value.author;
-    const numberOfLikes = this.form.value.numberOfLikes;
-    const comments = this.form.value.comments;
+onSubmit() {
+  const title = this.form.value.title;
+  const imagePath = this.form.value.imagePath;
+  const description = this.form.value.description;
 
-    const post: Post = new Post(
-      title, imagePath, description,'', new Date(),1,[]
-    );
-    if(this.editMode == true){
-      this.postService.updatePost(this.index, post)
-      this.backendservice.saveData();
-      alert("Post Edited");
-    }
-    else {
-      this.postService.addPost(post);
-      this.backendservice.saveData();
-      alert("Post Added");
-    }
+  this.afAuth.user.subscribe(user => {
+    if (user) {
+      const author = user.email ? user.email : '';
 
-    this.router.navigate(['post-list']);
-  }
+      const post: Post = new Post(
+        title, imagePath, description, author, new Date(), 1, []
+      );
+
+      if (this.editMode == true) {
+        this.postService.updatePost(this.index, post);
+        this.backendservice.saveData();
+        alert("Post Edited");
+      } else {
+        this.postService.addPost(post);
+        this.backendservice.saveData();
+        alert("Post Added");
+      }
+
+      this.router.navigate(['post-list']);
+    }
+  });
+}
 }
